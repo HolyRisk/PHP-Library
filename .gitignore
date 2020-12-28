@@ -1,0 +1,11 @@
+.idea
+.env
+.DS_Store
+composer.lock
+*.log
+application/upDatas
+application/auditData
+public/*
+/deployment.properties
+/.settings
+runtime/*
