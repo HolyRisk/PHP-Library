@@ -6,7 +6,7 @@
  * Class Db
  */
 
-class Db
+class DbHandle
 {
 
 }
