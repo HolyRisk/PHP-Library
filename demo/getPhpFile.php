@@ -8,3 +8,5 @@ $fileRootPath = dirname(__DIR__);
 
 //引用 字符串
 require_once $fileRootPath.'/src/StringHandle.php';
+//引用 文件
+require_once $fileRootPath.'/src/FileHandle.php';
