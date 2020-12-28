@@ -10,3 +10,5 @@ $fileRootPath = dirname(__DIR__);
 require_once $fileRootPath.'/src/StringHandle.php';
 //引用 文件
 require_once $fileRootPath.'/src/FileHandle.php';
+//引用 ftp
+require_once $fileRootPath.'/src/FtpHandle.php';
