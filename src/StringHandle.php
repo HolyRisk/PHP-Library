@@ -39,7 +39,6 @@ class StringHandle
                 }
                 break;
             default:
-                return $string;
                 break;
         }
         return $string;
