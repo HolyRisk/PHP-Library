@@ -82,10 +82,15 @@ try{
 //        $getRes = $obj->get($connectId,$local_file,$remote_file);
 //        var_dump($getRes);
         //从 FTP 服务器上获取文件并写入本地文件（non-blocking） 【异步下载】 -- 推荐使用这个
-        $remote_file = '/www/iu.png';
-        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu异步下载.png';
-        $nbgetRes = $obj->nb_get($connectId,$local_file,$remote_file);
+//        $remote_file = '/www/iu.png';
+//        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu异步下载.png';
+//        $nbgetRes = $obj->nb_get($connectId,$local_file,$remote_file);
+//        var_dump($nbgetRes);
+        //删除文件
+        $filePath = '/www/iu.png';
+        $nbgetRes = $obj->delete($connectId,$filePath);
         var_dump($nbgetRes);
+
         //--------------------------------------------------------------------------------------------------------------
         // 文件 start
         //--------------------------------------------------------------------------------------------------------------
