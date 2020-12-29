@@ -327,6 +327,23 @@ class FtpHandle
         return true;
     }
 
+    /**
+     * @description 从 FTP 服务器上下载一个文件 【普通 同步下载】
+     * @author Holyrisk
+     * @date 2020/12/29 16:30
+     * @param $connectId
+     * @param $local_file 文件本地的路径（如果文件已经存在，则会被覆盖）。
+     * @param $remote_file 文件的远程路径。
+     * @param int $mode 传送模式。只能为 (文本模式) FTP_ASCII 或 (二进制模式) FTP_BINARY 中的其中一个。
+     * @param int $resumepos 从远程文件的这个位置继续下载。
+     * @return bool
+     */
+    public function get($connectId,$local_file,$remote_file,$mode = FTP_BINARY,$resumepos = 0)
+    {
+        $result = ftp_get($connectId,$local_file,$remote_file,$mode,$resumepos);
+        return $result;
+    }
+
     //--------------------------------------------------------------------------------------------------------------
     // 文件 end
     //--------------------------------------------------------------------------------------------------------------
