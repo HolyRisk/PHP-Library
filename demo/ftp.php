@@ -18,11 +18,17 @@ try{
     if ($loginRes == true){
         //设置 打开 或者 关闭 被动模式
         $pasvRes = $obj->pasv($connectId,true);
-        var_dump($pasvRes);
+        //返回当前目录名
+        $pwdRes = $obj->pwd($connectId);
+        echo "返回当前目录名 ".$pwdRes;
+        echo "<br />";
+        //获取 路径下的文件列表 |  返回指定目录下文件的详细列表 | 有权限显示
+        $rawList = $obj->rawlist($connectId,$pwdRes,true);
+        echo "<br />";
+        var_dump($rawList);
     }
-
-//    $dd = $obj->close($connectId);
-//    var_dump($dd);
+    //断开连接
+    $obj->close($connectId);
 }catch (Exception $exception){
     var_dump($exception->getMessage());
 }
