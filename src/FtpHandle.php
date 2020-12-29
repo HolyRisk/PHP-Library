@@ -372,6 +372,20 @@ class FtpHandle
         return true;
     }
 
+    /**
+     * @description 删除 FTP 服务器上的一个文件
+     * @author Holyrisk
+     * @date 2020/12/29 17:33
+     * @param $connectId
+     * @param $filePath 函数用来删除 FTP 服务器上的一个由参数 path 指定的的文件。
+     * @return bool
+     */
+    public function delete($connectId,$filePath)
+    {
+        $result = ftp_delete($connectId,$filePath);
+        return $result;
+    }
+
     //--------------------------------------------------------------------------------------------------------------
     // 文件 end
     //--------------------------------------------------------------------------------------------------------------
