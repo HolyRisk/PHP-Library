@@ -169,4 +169,19 @@ class FtpHandle
         return $result;
     }
 
+    /**
+     * @description 获取 路径下的文件列表 |  返回指定目录下文件的详细列表 | 有权限显示
+     * @author Holyrisk
+     * @date 2020/12/29 11:23
+     * @param $connectId
+     * @param $pwdPath ftp 路径 如 通过 pwd 获取的 /
+     * @param bool $recursive ftp_rawlist() 函数将执行 FTP LIST 命令，并把结果做为一个数组返回。 如果此参数为 true，实际执行的命令将会为 LIST -R。
+     * @return array
+     */
+    public function rawlist($connectId,$pwdPath,$recursive = false)
+    {
+        $result = ftp_rawlist($connectId,$pwdPath,$recursive);
+        return $result;
+    }
+
 }
