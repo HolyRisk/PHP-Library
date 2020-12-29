@@ -26,6 +26,14 @@ try{
         $rawList = $obj->rawlist($connectId,$pwdRes,true);
         echo "<br />";
         var_dump($rawList);
+        //获取 路径下的文件列表 | 返回给定目录的文件列表 |  不显示权限
+        $nList = $obj->nlist($connectId,$pwdRes);
+        echo "<br />";
+        var_dump($nList);
+        //获取 路径下的文件列表 | 返回给定目录的文件列表 |  不显示权限  不显示路径 显示 区分 是否 文件夹 还是 文件
+        $mlsd = $obj->mlsd($connectId,$pwdRes);
+        echo "<br />";
+        var_dump($mlsd);
     }
     //断开连接
     $obj->close($connectId);
