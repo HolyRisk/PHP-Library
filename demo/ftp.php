@@ -87,9 +87,12 @@ try{
 //        $nbgetRes = $obj->nb_get($connectId,$local_file,$remote_file);
 //        var_dump($nbgetRes);
         //删除文件
-        $filePath = '/www/iu.png';
-        $nbgetRes = $obj->delete($connectId,$filePath);
-        var_dump($nbgetRes);
+//        $filePath = '/www/iu.png';
+//        $nbgetRes = $obj->delete($connectId,$filePath);
+//        var_dump($nbgetRes);
+        $dirPath = '/www';
+        $dirDelete = $obj->deleteDir($connectId,$dirPath);
+        echo json_encode($dirDelete);
 
         //--------------------------------------------------------------------------------------------------------------
         // 文件 start
