@@ -344,6 +344,34 @@ class FtpHandle
         return $result;
     }
 
+    /**
+     * @description 从 FTP 服务器上获取文件并写入本地文件（non-blocking） 【异步下载】 -- 推荐使用这个   和 ftp_get() 不同之处，在于此函数是通过异步的方式来获取文件，这意味着，你的程序可以在下载文件的同时，同步进行其它操作。
+     * @author Holyrisk
+     * @date 2020/12/29 17:04
+     * @param $connectId
+     * @param $local_file 保存到的本地文件路径（如果文件已存在会被覆盖）。
+     * @param $remote_file 远程文件路径。
+     * @param int $mode 传送模式。只能为 (文本模式) FTP_ASCII 或 (二进制模式) FTP_BINARY 中的其中一个。
+     * @param int $resumepos 开始下载文件的起始位置。
+     * @return bool
+     * @throws Exception
+     */
+    public function nb_get($connectId,$local_file,$remote_file,$mode = FTP_BINARY,$resumepos = 0)
+    {
+        $result = ftp_nb_get($connectId,$local_file,$remote_file,$mode,$resumepos);
+        while ($result == FTP_MOREDATA) {
+
+            // 可以同步干其它事
+            //echo ".";
+            // 继续下载...
+            $result = ftp_nb_continue($connectId);
+        }
+        if ($result != FTP_FINISHED) {
+            throw new Exception("下载文件出错...");
+        }
+        return true;
+    }
+
     //--------------------------------------------------------------------------------------------------------------
     // 文件 end
     //--------------------------------------------------------------------------------------------------------------
