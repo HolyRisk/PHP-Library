@@ -18,8 +18,8 @@ try{
     if ($loginRes == true){
         //设置 打开 或者 关闭 被动模式
         $pasvRes = $obj->pasv($connectId,true);
-//        //返回当前目录名
-//        $pwdRes = $obj->pwd($connectId);
+        //返回当前目录名
+        $pwdRes = $obj->pwd($connectId);
 //        echo "返回当前目录名 ".$pwdRes;
 //        echo "<br />";
 //        $pwdRes = $pwdRes.'soft\FileZilla Server 中文版';
@@ -28,8 +28,8 @@ try{
         //--------------------------------------------------------------------------------------------------------------
         // 获取文件列表 start
         //--------------------------------------------------------------------------------------------------------------
-//        //获取 路径下的文件列表 |  返回指定目录下文件的详细列表 | 有权限显示
-//        $rawList = $obj->rawlist($connectId,$pwdRes,true);
+        //获取 路径下的文件列表 |  返回指定目录下文件的详细列表 | 有权限显示
+        $rawList = $obj->rawlist($connectId,$pwdRes,true);
 //        echo "<br />";
 //        var_dump($rawList);
 //        //获取 路径下的文件列表 | 返回给定目录的文件列表 |  不显示权限
@@ -90,9 +90,11 @@ try{
 //        $filePath = '/www/iu.png';
 //        $nbgetRes = $obj->delete($connectId,$filePath);
 //        var_dump($nbgetRes);
-        $dirPath = '/www';
+//        $dirPath = '/aaa';
+        $dirPath = $pwdRes;
         $dirDelete = $obj->deleteDir($connectId,$dirPath);
-        echo json_encode($dirDelete);
+        var_dump($dirDelete);
+//        echo json_encode($dirDelete);
 
         //--------------------------------------------------------------------------------------------------------------
         // 文件 start
@@ -105,5 +107,6 @@ try{
     $obj->close($connectId);
 }catch (Exception $exception){
     var_dump($exception->getMessage());
+    var_dump($exception->getCode());
 }
 

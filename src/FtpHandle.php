@@ -21,6 +21,21 @@ class FtpHandle
     protected $port;
 
     /**
+     * @description 错误信息 对应 状态码
+     * @author Holyrisk
+     * @date 2020/12/29 18:16
+     * @var array
+     */
+    public $codeMessages = [
+        '请开启PHP ftp 扩展，才可以使用' => 101,
+        '连接ftp服务器失败' => 102,
+        '登录失败，账号或密码错误' => 103,
+        '返回当前目录名失败' => 201,
+        '上传过程中发生错误...' => 202,
+        '下载文件出错...' => 203,
+    ];
+
+    /**
      * @description 初始化 | 不建议 在初始化连接 资源 会导致 常驻进程失败
      * @author Holyrisk
      * @date 2020/12/28 17:35
@@ -51,7 +66,8 @@ class FtpHandle
     {
         // get_loaded_extensions()，返回所有已安装的扩展，格式为一维数组
         if (in_array('ftp', get_loaded_extensions()) == false){
-            throw new Exception("请开启PHP ftp 扩展，才可以使用");
+            $msgErr = "请开启PHP ftp 扩展，才可以使用";
+            throw new Exception($msgErr,$this->codeMessages[$msgErr]);
         }
     }
 
@@ -66,7 +82,8 @@ class FtpHandle
     {
         $connectId =  ftp_connect($this->host,$this->port);
         if ($connectId == false){
-            throw new Exception("连接ftp服务器失败");
+            $msgErr = "连接ftp服务器失败";
+            throw new Exception($msgErr,$this->codeMessages[$msgErr]);
         }
         return $connectId;
     }
@@ -119,7 +136,8 @@ class FtpHandle
         $result = ftp_login($connectId, $ftp_user_name, $ftp_user_pass);
         if ($result == false){
             $error = error_get_last();//成功时返回 true， 或者在失败时返回 false。 如果登录失败，PHP 会抛出一个警告。
-            throw new Exception("登录失败，账号或密码错误");//.$error['message']
+            $msgErr = "登录失败，账号或密码错误";
+            throw new Exception($msgErr,$this->codeMessages[$msgErr]);
         }
         return $result;
     }
@@ -164,7 +182,8 @@ class FtpHandle
     {
         $result = ftp_pwd($connectId);
         if ($result === false){
-            throw new Exception("返回当前目录名失败");
+            $msgErr = "返回当前目录名失败";
+            throw new Exception($msgErr,$this->codeMessages[$msgErr]);
         }
         return $result;
     }
@@ -349,7 +368,8 @@ class FtpHandle
             $result = ftp_nb_continue($connectId);
         }
         if ($result != FTP_FINISHED) {
-            throw new Exception("上传过程中发生错误...");
+            $msgErr = "上传过程中发生错误...";
+            throw new Exception($msgErr,$this->codeMessages[$msgErr]);
         }
         return true;
     }
@@ -394,7 +414,8 @@ class FtpHandle
             $result = ftp_nb_continue($connectId);
         }
         if ($result != FTP_FINISHED) {
-            throw new Exception("下载文件出错...");
+            $msgErr = "下载文件出错...";
+            throw new Exception($msgErr,$this->codeMessages[$msgErr]);
         }
         return true;
     }
