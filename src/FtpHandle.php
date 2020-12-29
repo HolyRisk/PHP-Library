@@ -152,4 +152,21 @@ class FtpHandle
         return $result;
     }
 
+    /**
+     * @description 返回当前目录名
+     * @author Holyrisk
+     * @date 2020/12/29 11:16
+     * @param $connectId
+     * @return string
+     * @throws Exception
+     */
+    public function pwd($connectId)
+    {
+        $result = ftp_pwd($connectId);
+        if ($result === false){
+            throw new Exception("返回当前目录名失败");
+        }
+        return $result;
+    }
+
 }
