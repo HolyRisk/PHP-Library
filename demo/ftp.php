@@ -50,12 +50,15 @@ try{
         //创建文件夹
 //        $mkdirRes = $obj->mkdir($connectId,'/www/cp');
 //        var_dump($mkdirRes);
-        //重命名
-//        $mkdirRes = $obj->rename($connectId,'/www/ppp','www2');
+        //重命名 文件夹
+//        $ranameRes = $obj->rename($connectId,'/www/ppp','www2');
 //        var_dump($mkdirRes);
         //删除 FTP 服务器上的一个目录 | 空目录
-        $rmdirRes = $obj->rmdir($connectId,'/aaa/bbb');
-        var_dump($rmdirRes);
+//        $rmdirRes = $obj->rmdir($connectId,'/aaa/bbb');
+//        var_dump($rmdirRes);
+        //重命名 文件
+        $renameRes = $obj->rename($connectId,'测试文件text.txt','测试文件-重命名.txt');
+        var_dump($renameRes);
         //--------------------------------------------------------------------------------------------------------------
         // 文件夹目录 end
         //--------------------------------------------------------------------------------------------------------------
