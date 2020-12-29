@@ -71,15 +71,21 @@ try{
 //        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu2.png';
 //        $putRes = $obj->put($connectId,$remote_file,$local_file);
 //        var_dump($putRes);
-        //异步上传
+        //异步上传 -- 推荐使用这个
 //        $remote_file = '/www/iu2.png';
 //        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu2.png';
 //        $nbputRes = $obj->nb_put($connectId,$remote_file,$local_file);
 //        var_dump($nbputRes);
-        $remote_file = '/www/iu2.png';
-        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu下载.png';
-        $getRes = $obj->get($connectId,$local_file,$remote_file);
-        var_dump($getRes);
+        //从 FTP 服务器上下载一个文件 【普通 同步下载】
+//        $remote_file = '/www/iu2.png';
+//        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu下载.png';
+//        $getRes = $obj->get($connectId,$local_file,$remote_file);
+//        var_dump($getRes);
+        //从 FTP 服务器上获取文件并写入本地文件（non-blocking） 【异步下载】 -- 推荐使用这个
+        $remote_file = '/www/iu.png';
+        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu异步下载.png';
+        $nbgetRes = $obj->nb_get($connectId,$local_file,$remote_file);
+        var_dump($nbgetRes);
         //--------------------------------------------------------------------------------------------------------------
         // 文件 start
         //--------------------------------------------------------------------------------------------------------------
