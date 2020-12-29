@@ -22,6 +22,9 @@ try{
         $pwdRes = $obj->pwd($connectId);
         echo "返回当前目录名 ".$pwdRes;
         echo "<br />";
+        $pwdRes = $pwdRes.'soft\FileZilla Server 中文版';
+        echo "切换当前目录名 ".$pwdRes;
+        echo "<br />";
         //获取 路径下的文件列表 |  返回指定目录下文件的详细列表 | 有权限显示
         $rawList = $obj->rawlist($connectId,$pwdRes,true);
         echo "<br />";
