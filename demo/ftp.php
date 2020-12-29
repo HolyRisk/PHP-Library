@@ -10,11 +10,12 @@ $host = '127.0.0.1';
 
 try{
     $obj = new FtpHandle($host);
-    $result = $obj->connect();
-    var_dump($result);
-    sleep(3);
-    $dd = $obj->close($result);
-    var_dump($dd);
+    $connectId = $obj->connect();
+    print_r($connectId);
+    $loginRes = $obj->login($connectId,'wshx','1234561');
+    var_dump($loginRes);
+//    $dd = $obj->close($connectId);
+//    var_dump($dd);
 }catch (Exception $exception){
     var_dump($exception->getMessage());
 }
