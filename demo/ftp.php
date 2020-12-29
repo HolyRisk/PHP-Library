@@ -72,10 +72,14 @@ try{
 //        $putRes = $obj->put($connectId,$remote_file,$local_file);
 //        var_dump($putRes);
         //异步上传
+//        $remote_file = '/www/iu2.png';
+//        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu2.png';
+//        $nbputRes = $obj->nb_put($connectId,$remote_file,$local_file);
+//        var_dump($nbputRes);
         $remote_file = '/www/iu2.png';
-        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu2.png';
-        $nbputRes = $obj->nb_put($connectId,$remote_file,$local_file);
-        var_dump($nbputRes);
+        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu下载.png';
+        $getRes = $obj->get($connectId,$local_file,$remote_file);
+        var_dump($getRes);
         //--------------------------------------------------------------------------------------------------------------
         // 文件 start
         //--------------------------------------------------------------------------------------------------------------
