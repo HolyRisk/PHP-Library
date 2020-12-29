@@ -184,4 +184,32 @@ class FtpHandle
         return $result;
     }
 
+    /**
+     * @description 获取 路径下的文件列表 | 返回给定目录的文件列表 |  不显示权限 显示路径
+     * @author Holyrisk
+     * @date 2020/12/29 11:40
+     * @param $connectId
+     * @param $pwdPath 指定要列表的目录。本参数接受带参数的形式，例如： ftp_nlist($conn_id, "-la /you/dir"); 注意此参数不对传入值做处理，在目录或者文件名包括空格或特殊的情况下，可能会存在问题。
+     * @return array
+     */
+    public function nlist($connectId,$pwdPath)
+    {
+        $result = ftp_nlist($connectId,$pwdPath);
+        return $result;
+    }
+
+    /**
+     * @description 获取 路径下的文件列表 | 返回给定目录的文件列表 |  不显示权限  不显示路径 显示 区分 是否 文件夹 还是 文件
+     * @author Holyrisk
+     * @date 2020/12/29 11:44
+     * @param $connectId
+     * @param $pwdPath
+     * @return array [name 名称 type 类型 文件还是文件夹  modify 最后修改时间  类型为 file 还会出现 size 参数]
+     */
+    public function mlsd($connectId,$pwdPath)
+    {
+        $result = ftp_mlsd($connectId,$pwdPath);
+        return $result;
+    }
+
 }
