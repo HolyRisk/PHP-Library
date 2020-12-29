@@ -66,10 +66,16 @@ try{
         //--------------------------------------------------------------------------------------------------------------
         // 文件 start
         //--------------------------------------------------------------------------------------------------------------
-        $remote_file = '/www/iu.png';
-        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu.png';
-        $putRes = $obj->put($connectId,$remote_file,$local_file);
-        var_dump($putRes);
+        //普通 同步上传
+//        $remote_file = '/www/iu.png';
+//        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu2.png';
+//        $putRes = $obj->put($connectId,$remote_file,$local_file);
+//        var_dump($putRes);
+        //异步上传
+        $remote_file = '/www/iu2.png';
+        $local_file = 'C:\Users\DDHK\Pictures\Saved Pictures\iu2.png';
+        $nbputRes = $obj->nb_put($connectId,$remote_file,$local_file);
+        var_dump($nbputRes);
         //--------------------------------------------------------------------------------------------------------------
         // 文件 start
         //--------------------------------------------------------------------------------------------------------------
