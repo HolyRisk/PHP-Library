@@ -284,7 +284,7 @@ class FtpHandle
     //--------------------------------------------------------------------------------------------------------------
 
     /**
-     * @description 上传指定的本地文件到 FTP 服务器
+     * @description 上传指定的本地文件到 FTP 服务器 【普通 同步上传】
      * @author Holyrisk
      * @date 2020/12/29 14:55
      * @param $connectId
@@ -298,6 +298,33 @@ class FtpHandle
     {
         $result = ftp_put($connectId,$remote_file,$local_file,$mode,$startpos);
         return $result;
+    }
+
+    /**
+     * @description 上传指定的本地文件到 FTP 服务器 【异步上传 （non-blocking） 】 -- 推荐使用这个  与函数 ftp_put() 不同的是，此函数上传文件的时候采用的是异步传输模式，也就意味着在文件传送的过程中，你的程序可以继续干其它的事情。
+     * @author Holyrisk
+     * @date 2020/12/29 15:45
+     * @param $connectId
+     * @param $remote_file 远程文件路径 | 如果 文件夹未创建 直接 上传文件过来 会导致 上传失败 false
+     * @param $local_file 本地文件路径
+     * @param int $mode 传送模式，只能为 FTP_ASCII（文本模式）或 FTP_BINARY（二进制模式）。
+     * @param int $startpos 指定开始上传的位置，一般用来文件续传。
+     * @return bool
+     * @throws Exception
+     */
+    public function nb_put($connectId,$remote_file,$local_file,$mode = FTP_BINARY,$startpos = 0)
+    {
+        $result = ftp_nb_put($connectId,$remote_file,$local_file,$mode,$startpos);
+        while ($result == FTP_MOREDATA) {
+            // 可以同时干其它事
+            //echo ".";
+            // 继续上传...
+            $result = ftp_nb_continue($connectId);
+        }
+        if ($result != FTP_FINISHED) {
+            throw new Exception("上传过程中发生错误...");
+        }
+        return true;
     }
 
     //--------------------------------------------------------------------------------------------------------------
