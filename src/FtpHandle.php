@@ -37,6 +37,7 @@ class FtpHandle
         }
         $this->host = $host;
         $this->port = $port;
+        //校验 ftp 扩展 是否 开启 可用
         $this->check();
     }
 
@@ -80,6 +81,46 @@ class FtpHandle
     public function close($connectId)
     {
         $result = ftp_close($connectId);
+        return $result;
+    }
+
+    /**
+     * @description 设置 异常 错误信息 显示 和 捕获
+     * @author Holyrisk
+     * @date 2020/12/29 9:51
+     */
+    public function setLogError()
+    {
+        // 监听捕获的错误级别
+        error_reporting(E_ALL);
+        // 是否开启错误信息回显 将错误输出至标准输出（浏览器/命令行） 错误日志的保存文件。注意：如果路径无效，display_errors 会被强制开启。
+        //是否记录错误日志。默认关闭，生产环境下强烈建议
+        ini_set('display_errors',false);
+        // 是否开启错误日志记录 将错误记录至 ini：error_log 指定文件
+        ini_set('log_errors',true);
+        //ini_set('error_log',__DIR__.'/php-errors.log');
+    }
+
+    /**
+     * @description ftp 账号登录
+     * @author Holyrisk
+     * @date 2020/12/29 9:20
+     * @param $connectId 资源 ID
+     * @param $ftp_user_name 用户名
+     * @param $ftp_user_pass 密码
+     * @return bool
+     * @throws Exception
+     */
+    public function login($connectId,$ftp_user_name,$ftp_user_pass)
+    {
+        //登录失败 会打印 Warning 错误显示
+        $this->setLogError();
+
+        $result = ftp_login($connectId, $ftp_user_name, $ftp_user_pass);
+        if ($result == false){
+            $error = error_get_last();//成功时返回 true， 或者在失败时返回 false。 如果登录失败，PHP 会抛出一个警告。
+            throw new Exception("登录失败，账号或密码错误");//.$error['message']
+        }
         return $result;
     }
 
