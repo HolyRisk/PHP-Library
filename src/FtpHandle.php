@@ -275,6 +275,33 @@ class FtpHandle
         return $result;
     }
 
+    /**
+     * @description 删除 整个文件夹数据 | 文件夹 含有数据的
+     * @author Holyrisk
+     * @date 2020/12/29 17:38
+     * @param $connectId
+     * @param $dirNamePath 删除文件夹的路径
+     * @return bool
+     */
+    public function deleteDir($connectId,$dirNamePath)
+    {
+        //打开 列表
+        $lists = ftp_mlsd($connectId, $dirNamePath);
+        foreach($lists as $list){
+            $full = $dirNamePath . '/' . $list['name'];
+            if($list['type'] == 'dir'){
+                //循环
+                $this->deleteDir($connectId, $full);
+            }else{
+                //删除文件
+                ftp_delete($connectId, $full);
+            }
+        }
+        //删除 原路径
+        $result = ftp_rmdir($connectId, $dirNamePath);
+        return $result;
+    }
+
     //--------------------------------------------------------------------------------------------------------------
     // 文件夹目录 / 文件 end
     //--------------------------------------------------------------------------------------------------------------
