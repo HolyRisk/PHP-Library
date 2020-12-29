@@ -7,13 +7,20 @@
 require_once 'getPhpFile.php';
 
 $host = '127.0.0.1';
+$port = 21;
 
 try{
-    $obj = new FtpHandle($host);
+    $obj = new FtpHandle($host,$port);
+    //连接
     $connectId = $obj->connect();
-    print_r($connectId);
-    $loginRes = $obj->login($connectId,'wshx','1234561');
-    var_dump($loginRes);
+    //登录
+    $loginRes = $obj->login($connectId,'wshx','123456');
+    if ($loginRes == true){
+        //设置 打开 或者 关闭 被动模式
+        $pasvRes = $obj->pasv($connectId,true);
+        var_dump($pasvRes);
+    }
+
 //    $dd = $obj->close($connectId);
 //    var_dump($dd);
 }catch (Exception $exception){
