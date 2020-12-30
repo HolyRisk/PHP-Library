@@ -12,3 +12,5 @@ require_once $fileRootPath.'/src/StringHandle.php';
 require_once $fileRootPath.'/src/FileHandle.php';
 //引用 ftp
 require_once $fileRootPath.'/src/FtpHandle.php';
+//引用 日期
+require_once $fileRootPath.'/src/DateHandle.php';
