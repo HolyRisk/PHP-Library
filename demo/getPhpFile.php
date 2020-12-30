@@ -14,3 +14,5 @@ require_once $fileRootPath.'/src/FileHandle.php';
 require_once $fileRootPath.'/src/FtpHandle.php';
 //引用 日期
 require_once $fileRootPath.'/src/DateHandle.php';
+//引用 curl
+require_once $fileRootPath.'/src/RequestCurl.php';
