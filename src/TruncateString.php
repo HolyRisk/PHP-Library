@@ -1,6 +1,6 @@
 <?php
 /**
- * @description 字符串转换
+ * @description 字符串转换处理
  * @author Holyrisk
  * @date 2020/12/30 10:25
  * Class TruncateString
