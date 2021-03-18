@@ -5,6 +5,7 @@
  * @date 2020/12/28 11:49
  * Class StringHandle
  */
+namespace src;
 
 class StringHandle
 {
